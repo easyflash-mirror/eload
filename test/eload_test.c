@@ -21,8 +21,6 @@
  *
  * Thomas Giesel skoe@directbox.com
  */
-
-
 #include <string.h>
 #include <unistd.h>
 #include <6502.h>
@@ -38,8 +36,7 @@ static uint8_t block[256];
 static uint8_t gcr[325];
 
 // from gcr.s:
-void __fastcall__ convert_block_to_gcr(uint8_t* p_dst, uint8_t* p_src);
-
+void __fastcall__ convert_block_to_gcr(uint8_t *p_dst, uint8_t *p_src);
 
 static uint8_t get_drive_number(void)
 {
@@ -55,7 +52,6 @@ static uint8_t get_drive_number(void)
     return drv;
 }
 
-
 static void wait_key(void)
 {
     while (kbhit())
@@ -63,9 +59,6 @@ static void wait_key(void)
     puts("\n\npress a key");
     cgetc();
 }
-
-
-
 
 static unsigned init_eload(void)
 {
@@ -82,7 +75,6 @@ static unsigned init_eload(void)
     }
     return type;
 }
-
 
 static uint8_t sectors_on_track(uint8_t t)
 {
@@ -104,7 +96,8 @@ static void write_all_sectors(void)
     // disable VIC-II DMA
     VIC.ctrl1 &= 0xef;
     while (VIC.rasterline != 255)
-    {}
+    {
+    }
 
     for (t = 1; t < 36; ++t)
     {
@@ -142,8 +135,6 @@ static void test_write_sector(void)
     eload_close();
 }
 
-
-
 static void test_read_sector(void)
 {
     static uint8_t block[256];
@@ -158,7 +149,8 @@ static void test_read_sector(void)
     SEI();
     VIC.ctrl1 &= 0xef;
     while (VIC.rasterline != 255)
-    {}
+    {
+    }
 
     eload_prepare_drive();
 
@@ -193,7 +185,6 @@ static void test_read_sector(void)
     eload_close();
 }
 
-
 static void test_format(void)
 {
     if (init_eload() == 0)
@@ -210,7 +201,6 @@ static void test_format(void)
     eload_close();
     wait_key();
 }
-
 
 static void test_checksums(void)
 {
@@ -248,8 +238,8 @@ static void test_checksums(void)
                     if (block[pos] != 0xcd || block[pos + 1] != 0x40)
                     {
                         printf("Track %d, pos %d: %02x %02x\n",
-                                n_track, pos,
-                                block[pos], block[pos + 1]);
+                               n_track, pos,
+                               block[pos], block[pos + 1]);
                     }
                 }
             }
@@ -259,7 +249,6 @@ static void test_checksums(void)
     }
     wait_key();
 }
-
 
 int main(void)
 {
@@ -277,9 +266,9 @@ int main(void)
         key = cgetc();
         if (key == 'w')
             test_write_sector();
-        if (key == 'r')
+        else if (key == 'r')
             test_read_sector();
-        if (key == 'c')
+        else if (key == 'c')
             test_checksums();
         else if (key == 'f')
             test_format();
