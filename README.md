@@ -1,10 +1,27 @@
 # ELoad
 
-[[_TOC_]]
-
 ## Introduction
 
-TODO
+This is ELoad, a fast loader library for various Commodore 64/128 drives.
+
+## Website, Repository and Issue Tracker
+
+EasyFlash website: https://skoe.de/easyflash/
+
+Official repository and issue tracker:
+https://gitlab.com/easyflash/eload/
+
+Other EasyFlash related repositories:
+https://gitlab.com/easyflash/
+
+Source repository mirror:
+https://github.com/easyflash-mirror/eload/
+
+## License
+
+(C) Thomas 'skoe' Giesel
+
+Refer to [LICENSE.md](./LICENSE.md).
 
 ## Memory Maps
 
